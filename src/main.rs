@@ -15,10 +15,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let database_url = env::var("DATABASE_URL").expect("missing DATABASE_URL env");
 
-    let pool = PgPoolOptions::new()
+    let pool = match PgPoolOptions::new()
         .max_connections(5)
         .connect(&database_url)
-        .await?;
+        .await
+        {
+            Ok(pool) => {
+                println!("✅Connection to the database is successful!");
+                pool
+            }
+            Err(err) => {
+                println!("🔥 Failed to connect to the database: {:?}", err);
+                std::process::exit(1);
+            }
+        };
 
     let app = Router::new()
         .route("/", get(handlers::health))
