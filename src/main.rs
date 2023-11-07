@@ -1,12 +1,17 @@
 mod handlers;
+
 use axum::routing::{get, post, Router};
 use sqlx::postgres::PgPoolOptions;
 use std::env;
+use dotenv::dotenv;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
     let addr = format!("0.0.0.0:{}", port);
+
+    dotenv().ok();
+    env_logger::init();
 
     let database_url = env::var("DATABASE_URL").expect("missing DATABASE_URL env");
 
