@@ -21,7 +21,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
         {
             Ok(pool) => {
-                println!("✅Connection to the database is successful!");
+                println!("✅ Connection to the database is successful!");
                 pool
             }
             Err(err) => {
