@@ -77,7 +77,7 @@ pub async fn update_quote(
     extract::State(pool): extract::State<PgPool>,
     extract::Path(id): extract::Path<uuid::Uuid>,
     axum::Json(payload): axum::Json<CreateQuote>,
-) -> http::StatusCode{
+) -> http::StatusCode {
     let now = chrono::Utc::now();
 
     let res = sqlx::query(
@@ -98,7 +98,7 @@ pub async fn update_quote(
         _ => http::StatusCode::OK,
     });
 
-    match  res {
+    match res {
         Ok(status) => status,
         Err(_) => http::StatusCode::INTERNAL_SERVER_ERROR,
     }

@@ -1,9 +1,9 @@
 mod handlers;
 
 use axum::routing::{get, post, put, Router};
+use dotenv::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use std::env;
-use dotenv::dotenv;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -19,16 +19,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .max_connections(5)
         .connect(&database_url)
         .await
-        {
-            Ok(pool) => {
-                println!("✅ Connection to the database is successful!");
-                pool
-            }
-            Err(err) => {
-                println!("🔥 Failed to connect to the database: {:?}", err);
-                std::process::exit(1);
-            }
-        };
+    {
+        Ok(pool) => {
+            println!("✅ Connection to the database is successful!");
+            pool
+        }
+        Err(err) => {
+            println!("🔥 Failed to connect to the database: {:?}", err);
+            std::process::exit(1);
+        }
+    };
 
     let app = Router::new()
         .route("/", get(handlers::health))
