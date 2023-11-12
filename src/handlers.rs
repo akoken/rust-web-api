@@ -122,7 +122,7 @@ pub async fn delete_quote(
         _ => http::StatusCode::OK,
     });
 
-    match  res {
+    match res {
         Ok(status) => status,
         Err(_) => http::StatusCode::INTERNAL_SERVER_ERROR,
     }
