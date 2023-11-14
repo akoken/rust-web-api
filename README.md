@@ -1,2 +1,2 @@
-# rust-web-api
-This repository contains the source code of a sample CRUD application in Rust.
+# Rust Web API Example
+In this repository, you will find the source code for a straightforward CRUD application implemented in Rust, leveraging the power of PostgreSQL for data management.
