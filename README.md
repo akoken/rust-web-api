@@ -26,5 +26,5 @@ Welcome to the Rust Web API Example repository! Dive into the source code of a s
 To test the create endpoint, use the following `curl` command:
 
    ```bash
-   curl -sS -H 'Content-Type: application/json' -X POST -d '{"book":"A Game of Thrones", "quote":"Fear cuts deeper than swords"}' http://localhost:3000/quotes | jq
+   curl -sS -H 'Content-Type: application/json' -X POST -d '{"book":"The Lord of the Rings", "quote":"Sometimes to find the light, We must first touch the darkness."}' http://localhost:3000/quotes | jq
    ```
