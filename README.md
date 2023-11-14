@@ -1,3 +1,4 @@
+# Rust Web API Example
 Welcome to the Rust Web API Example repository! Dive into the source code of a simple yet powerful CRUD application crafted in Rust, seamlessly integrated with PostgreSQL for robust data management.
 
 ## Running the Project Locally
