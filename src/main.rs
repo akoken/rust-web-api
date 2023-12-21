@@ -3,17 +3,16 @@ mod handlers;
 use axum::routing::{delete, get, post, put, Router};
 use dotenv::dotenv;
 use sqlx::postgres::PgPoolOptions;
-use std::env;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+    let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_string());
     let addr = format!("0.0.0.0:{}", port);
 
     dotenv().ok();
     env_logger::init();
 
-    let database_url = env::var("DATABASE_URL").expect("missing DATABASE_URL env");
+    let database_url = "postgresql://admin:password123@localhost:6500/rust_sqlx?schema=public";
 
     let pool = match PgPoolOptions::new()
         .max_connections(5)
