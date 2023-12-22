@@ -1,20 +1,29 @@
-version: '3'
+version: '3.9'
+
 services:
-  postgres:
+  web-api:
+    container_name: web-api
+    image: akoken/web-api:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile.chiselled
+      args:
+        - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+  db:
+    container_name: db
     image: postgres:latest
-    container_name: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: quotes
     ports:
-      - '6500:5432'
+      - '5432:5432'
     volumes:
-      - quotesDB:/data/postgres
-    env_file:
-      - ./.env
-  pgAdmin:
-    image: dpage/pgadmin4
-    container_name: pgAdmin
-    env_file:
-      - ./.env
-    ports:
-      - "5050:80"
+      - pgdata:/data/postgres
+
 volumes:
-  quotesDB:
+  pgdata: {}
