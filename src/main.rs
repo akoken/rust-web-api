@@ -12,7 +12,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv().ok();
     env_logger::init();
 
-    let database_url = "postgresql://admin:password123@localhost:6500/rust_sqlx?schema=public";
+    let database_url = "postgresql://admin:password123@db:5432/quotes?schema=public";
 
     let pool = match PgPoolOptions::new()
         .max_connections(5)
@@ -28,6 +28,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             std::process::exit(1);
         }
     };
+
+    sqlx::migrate!("./migrations")
+    .run(&pool)
+    .await?;
 
     let app = Router::new()
         .route("/", get(handlers::health))
