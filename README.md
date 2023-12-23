@@ -28,20 +28,22 @@ This project optimizes the final Docker image size by utilizing Ubuntu Chiselled
 
 **Building the base image:**
  ```shell
- docker build -t chiselled-ubuntu-base:latest . --build-arg ARCH=<your_arch> # example ARCH=arm64
+ docker build -t chiselled-ubuntu:latest . --build-arg ARCH=<your_arch> # example ARCH=arm64
  ```
+
 **Running the application:**
 ```shell
 docker compose up -d
 ```
+
 ## Testing
 To test the create endpoint, use the following `curl` command:
 
-   ```shell
-   curl -sS -H 'Content-Type: application/json' -X POST -d '{"book":"The Lord of the Rings", "quote":"Sometimes to find the light, We must first touch the darkness."}' http://localhost:8080/quotes | jq
-   ```
+```shell
+curl -sS -H 'Content-Type: application/json' -X POST -d '{"book":"The Lord of the Rings", "quote":"Sometimes to find the light, We must first touch the darkness."}' http://localhost:8080/quotes | jq
+```
 
-   To test the read endpoint, use the following `curl` command:
-   ```shell
-   curl http://localhost:8080/quotes | jq
-   ```
+To test the read endpoint, use the following `curl` command:
+```shell
+curl http://localhost:8080/quotes | jq
+```
