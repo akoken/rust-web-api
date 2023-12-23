@@ -32,9 +32,9 @@ This project optimizes the final Docker image size by utilizing Ubuntu Chiselled
 ```shell
 docker compose up -d
 ```
-## Testing the Create Endpoint
+## Testing
 To test the create endpoint, use the following `curl` command:
 
-   ```bash
+   ```shell
    curl -sS -H 'Content-Type: application/json' -X POST -d '{"book":"The Lord of the Rings", "quote":"Sometimes to find the light, We must first touch the darkness."}' http://localhost:3000/quotes | jq
    ```
