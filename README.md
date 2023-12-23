@@ -5,7 +5,7 @@ Welcome to the Rust Web API Example repository! Dive into the source code of a s
 1. Start the PostgreSQL server in a Docker container:
 
    ```bash
-   docker-compose up -d
+    docker-compose up -d db
    ```
 2. Install the SQLX-CLI if not already installed and apply the "up" migration script to the PostgreSQL database:
 
