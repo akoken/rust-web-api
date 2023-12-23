@@ -21,7 +21,17 @@ Welcome to the Rust Web API Example repository! Dive into the source code of a s
    ```bash
    cargo r -r
    ```
+## Running the Project in Docker
+This project optimizes the final Docker image size by utilizing Ubuntu Chiselled as the base image. Therefore, it's essential to build this base Docker image initially before running the application.
 
+**Building the base image:**
+ ```shell
+ docker build -t chiselled-ubuntu-base:latest . --build-arg ARCH=<your_arch> # example ARCH=arm64
+ ```
+**Running the application:**
+```shell
+docker compose up -d
+```
 ## Testing the Create Endpoint
 To test the create endpoint, use the following `curl` command:
 
