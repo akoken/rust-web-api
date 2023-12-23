@@ -22,7 +22,9 @@ Welcome to the Rust Web API Example repository! Dive into the source code of a s
    cargo r -r
    ```
 ## Running the Project in Docker
-This project optimizes the final Docker image size by utilizing Ubuntu Chiselled as the base image. Therefore, it's essential to build this base Docker image initially before running the application.
+This project optimizes the final Docker image size by utilizing Ubuntu Chiselled as the base image. Therefore, it's essential to build this base Docker image initially before running the application. 
+
+> Note that building the base image is a one-time operation.
 
 **Building the base image:**
  ```shell
