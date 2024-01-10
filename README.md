@@ -28,7 +28,7 @@ This project optimizes the final Docker image size by utilizing Ubuntu Chiselled
 
 **Building the base image:**
  ```shell
- docker build -t chiselled-ubuntu:latest . --build-arg ARCH=<your_arch> # example ARCH=arm64
+ docker buildx build -f Dockerfile.base --platform linux/arm64 --tag chiselled-ubuntu:latest . --load
  ```
 
 **Running the application:**
