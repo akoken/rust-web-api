@@ -24,4 +24,4 @@ FROM scratch
 COPY --from=builder /rootfs /
 
 # Build base chiselled image
-# docker build -t chiselled-ubuntu:latest . --build-arg ARCH=<your_arch> # example ARCH=amd64
+# docker buildx build -f Dockerfile.base --platform linux/arm64,linux/amd64 --tag akoken/chiselled-ubuntu:latest . --load
