@@ -1,23 +1,23 @@
-FROM rust:1.74.1 as APP_PLANNER
+FROM rust:1.74.1 as planner
 WORKDIR /usr/local/src
 RUN cargo install cargo-chef
 COPY . .
 RUN cargo chef prepare --recipe-path recipe.json
 
-FROM rust:1.74.1 as APP_CACHER
+FROM rust:1.74.1 as cacher
 WORKDIR /usr/local/src
 RUN cargo install cargo-chef
-COPY --from=APP_PLANNER /usr/local/src/recipe.json recipe.json
+COPY --from=planner /usr/local/src/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 
-FROM rust:1.74.1 as APP_BUILDER
+FROM rust:1.74.1 as builder
 COPY . /usr/local/src
 WORKDIR /usr/local/src
-COPY --from=APP_CACHER /usr/local/src/target target
-COPY --from=APP_CACHER $CARGO_HOME $CARGO_HOME
+COPY --from=cacher /usr/local/src/target target
+COPY --from=cacher $CARGO_HOME $CARGO_HOME
 RUN cargo build --release
 
 FROM chiselled-ubuntu:latest
-COPY --from=APP_BUILDER /usr/local/src/target/release/quotes /usr/local/bin/quotes
+COPY --from=builder /usr/local/src/target/release/quotes /usr/local/bin/quotes
 WORKDIR /usr/local/bin
 ENTRYPOINT [ "./quotes" ]
